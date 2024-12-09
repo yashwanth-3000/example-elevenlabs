@@ -32,7 +32,7 @@ Clone the repository and navigate to the example folder:
 
 ```bash
 git clone https://github.com/restackio/examples-python
-cd examples-python/examples/get-started
+cd examples-python/examples/elevenlabs
 ```
 
 ### 4. Install Dependencies Using Poetry
@@ -75,7 +75,7 @@ The following two functions are defined in this setup:
 ### 1. Test Text to Speech
 
 To test the **Text to Speech** function
-First go to src/workflows/workflow.py and add your desired text input data and then use the following command:
+First go to src/workflows/workflow.py and add your desired text in input_data and then use the following command:
 
 ```bash
 poetry run text_to_speech
