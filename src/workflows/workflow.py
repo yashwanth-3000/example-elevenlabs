@@ -2,11 +2,14 @@ from datetime import timedelta
 from restack_ai.workflow import workflow, import_functions, log
 import logging
 from datetime import timedelta
-
+from dotenv import load_dotenv
 import os
+# Load the environment variables
+load_dotenv()
+
 # Import the function
 with import_functions():
-    from src.functions.function import text_to_speech, speech_to_speech , isolate_audio
+    from src.functions.function import text_to_speech, isolate_audio
 
 
 api_key = os.getenv("ELEVEN_LABS_API_KEY")

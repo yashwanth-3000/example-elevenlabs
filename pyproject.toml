@@ -4,7 +4,7 @@ name = "Elvenlabs"
 version = "0.0.1"
 description = "A simple example to get started with the restack-ai SDK with elevenlabs"
 authors = [
-    "Restack Team <service@restack.io> and Yashwanth Krishna",
+    "Restack Team <service@restack.io>",
 ]
 readme = "README.md"
 packages = [{include = "src"}]
@@ -26,5 +26,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 dev = "src.services:watch_services"
 services = "src.services:run_services"
-schedule = "schedule_workflow:run_schedule_workflow"
-audio_isolation = "schedule_workflow_audio_isolation:run_schedule_workflow_audio_isolation"
+text_to_speech = "schedule_workflow:run_schedule_workflow"
+voice_isolation = "schedule_workflow_audio_isolation:run_schedule_workflow_audio_isolation"

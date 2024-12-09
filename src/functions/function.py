@@ -2,7 +2,7 @@ from restack_ai.function import function, log
 import requests
 import base64
 import json
-from elevenlabs.client import ElevenLabs
+import logging
 
 
 @function.defn()
@@ -73,10 +73,13 @@ async def text_to_speech(input: dict) -> dict:
         log.error("text_to_speech function failed", error=str(e))
         raise e
 
+# Initialize logger
+#log = logging.getLogger(__name__)
+
 @function.defn()
 async def isolate_audio(input: dict) -> dict:
     """
-    Perform audio isolation using ElevenLabs API and return Base64-encoded audio.
+    Perform audio isolation using the ElevenLabs API via direct HTTP POST request and return Base64-encoded audio.
     Args:
         input (dict): A dictionary containing:
             - api_key (str): The ElevenLabs API key.
@@ -98,15 +101,28 @@ async def isolate_audio(input: dict) -> dict:
         if not audio_file_path:
             raise ValueError("Audio file path is missing.")
 
-        # Initialize the ElevenLabs client
-        client = ElevenLabs(api_key=api_key)
+        # Endpoint for ElevenLabs Audio Isolation
+        url = "https://api.elevenlabs.io/v1/audio-isolation"
 
-        # Perform audio isolation
+        # Read the audio file
         with open(audio_file_path, "rb") as audio_file:
-            isolated_audio_iterator = client.audio_isolation.audio_isolation(audio=audio_file)
+            # The `requests` library automatically handles the boundary for multipart requests
+            files = {"audio": audio_file}
+            headers = {
+                "xi-api-key": api_key  # Use the correct header key
+            }
 
-            # Collect isolated audio chunks
-            isolated_audio = b"".join(chunk for chunk in isolated_audio_iterator)
+            # Make the POST request to the ElevenLabs API
+            log.info("Sending request to ElevenLabs API...")
+            response = requests.post(url, headers=headers, files=files)
+
+        # Check response status
+        if response.status_code != 200:
+            log.error("Audio isolation failed", status_code=response.status_code, response=response.text)
+            raise ValueError(f"API request failed with status code {response.status_code}: {response.text}")
+
+        # Extract the audio payload
+        isolated_audio = response.content
 
         # Convert isolated audio to Base64
         base64_audio = base64.b64encode(isolated_audio).decode("utf-8")
@@ -120,5 +136,3 @@ async def isolate_audio(input: dict) -> dict:
     except Exception as e:
         log.error("isolate_audio function failed", error=str(e))
         raise e
-
-
