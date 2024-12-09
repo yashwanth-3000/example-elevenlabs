@@ -54,6 +54,13 @@ Start the Restack service with the defined workflows and functions:
 poetry run dev
 ```
 
+### 6. Export api key 
+
+```bash
+export ELEVEN_LABS_API_KEY= your_api_key_here
+```
+
+
 This will start the Restack service, enabling the functions for **Text to Speech** and **Voice Isolation**.
 
 ## Available Functions
