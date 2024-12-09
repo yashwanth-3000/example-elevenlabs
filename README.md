@@ -74,23 +74,25 @@ The following two functions are defined in this setup:
 
 ### 1. Test Text to Speech
 
-To test the **Text to Speech** function, use the following command:
+To test the **Text to Speech** function
+First go to src/workflows/workflow.py and add your desired text input data and then use the following command:
 
 ```bash
-poetry run text_to_speech "Hello, this is a test message from Restack and ElevenLabs!"
+poetry run text_to_speech
 ```
 
-This will generate speech from the text and output the audio. You can also add an image or visual representation of the generated audio, like the waveform or a snapshot of the audio file.
+This will generate speech from the text and output the audio. 
 
 ### 2. Test Voice Isolation
 
-To test the **Voice Isolation** function, use the following command:
+To test the **Voice Isolation** function,
+First go to src/workflows/workflow.py and add your audio file path in audio_file_path and then use the following command:
 
 ```bash
-poetry run voice_isolation "path_to_audio_file.wav"
+poetry run voice_isolation
 ```
 
-This will isolate the voice from the provided audio file and output the isolated voice audio. You can also add an image or visual representation of the isolated audio.
+This will isolate the voice from the provided audio file and output the isolated voice audio.
 
 ## Project Structure
 
@@ -101,7 +103,9 @@ This will isolate the voice from the provided audio file and output the isolated
    * **services.py**: Sets up and runs the Restack services.
 * **test_functions.py**: Example script to test the **Text to Speech** and **Voice Isolation** functions.
 * **schedule_workflow.py**: Example script to schedule and run workflows if needed.
+* **schedule_workflow.py**: Example script to schedule and run workflows if needed.
+* **mpfile.mp3**: Example audio file
 
 ## Conclusion
 
-This project demonstrates how to integrate ElevenLabs functions with the Restack AI SDK. You can easily modify the workflows and functions to suit your specific needs, such as adding new AI capabilities or adjusting the parameters for text-to-speech and voice isolation tasks.
+This Example demonstrates how to integrate ElevenLabs functions with the Restack AI SDK. You can easily modify the workflows and functions to suit your specific needs, such as adding new AI capabilities or adjusting the parameters for text-to-speech and voice isolation tasks.
